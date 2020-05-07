@@ -5,9 +5,15 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Development
+To serve the front-end
 ```
 npm run serve
+```
+
+To start the WebSocket server, run
+```
+npm run dev
 ```
 
 ### Compiles and minifies for production
