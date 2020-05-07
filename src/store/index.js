@@ -3,8 +3,7 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-const protocol = window.location.protocol === "https" ? "wss" : "ws";
-const socket = new WebSocket(`${protocol}://${window.location.hostname}:3000`);
+const socket = new WebSocket(process.env.VUE_APP_BACKEND_URL);
 
 function createWebSocketPlugin(socket) {
   return store => {
