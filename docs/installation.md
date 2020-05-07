@@ -1,7 +1,8 @@
 # Installation
 > Local setup
 
-## System dependencies
+
+## Install system dependencies
 
 Install [NodeJS](https://nodejs.org/) globally. This will include NPM, for managing packages.
 
@@ -21,7 +22,7 @@ cd hackathon-team-queue
 ```
 
 
-### Install project dependencies
+## Install project dependencies
 
 ```
 npm install
