@@ -11,13 +11,14 @@ const port = process.env.PORT || 3000;
 // Default time per user in seconds.
 const TIME_PER_USER = 5 * 60 * 60;
 
-// Global variable for testing.
+// Shops.
 var QUEUES = {
-  foo: new Queue(),
-  bar: new Queue(),
-  baz: new Queue()
+  clicks: new Queue(),
+  woolworths: new Queue(),
+  picknpay: new Queue()
 };
 
+// Random ID of digits, of set length.
 function makeId(length = 6) {
   var result = "";
   var characters = "0123456789";
@@ -29,6 +30,7 @@ function makeId(length = 6) {
   return result;
 }
 
+// Handle 404 errors for bad queue IDs.
 function getQueueOrThrowError(res, id) {
   var q = QUEUES[id];
   if (typeof q === "undefined") {
