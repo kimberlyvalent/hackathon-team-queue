@@ -1,21 +1,54 @@
 <template>
   <div class="queue-teller">
     <router-link to="/">Back</router-link>
-    <h1>Joining queue as teller #{{ id }}</h1>
-    <div>Loading&hellip;</div>
+    <div v-if="users.serving">Now serving {{ users.serving }}</div>
+    <div v-if="users.count === null">
+      Loading&hellip;
+    </div>
+    <div v-else-if="users.count === 0">
+      There are <strong>no</strong> users in the queue
+    </div>
+    <div v-else-if="users.count === 1">
+      There is <strong>1</strong> user in the queue
+    </div>
+    <div v-else-if="users.count > 1">
+      There are <strong>{{ users.count }}</strong> users in the queue
+    </div>
+    <div v-else-if="users.error">
+      {{ queue.error }}
+    </div>
+
+    <button v-if="users.count > 0" @click="shiftQueue" :disabled="users.shifting">Next please!</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Queue",
+  name: "QueueTeller",
   props: ["id"],
+  data() {
+    return {
+      polling: null
+    };
+  },
+  methods: {
+    shiftQueue() {
+      this.$store.dispatch("shiftQueue", this.id);
+    },
+  },
   mounted() {
-    // TODO: We can attempt to join the queue here. If the REST API responds
-    // 404, we can display a "Queue Not Found" error, otherwise we can commence
-    // polling for queue updates.
-    const token = this.$route.query.token;
-    console.log("Dispatch teller join", this.id, token);
+    this.$store.dispatch("listQueueUsers", this.id);
+    this.polling = setInterval(() => {
+      this.$store.dispatch("listQueueUsers", this.id);
+    }, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
+  },
+  computed: {
+    users() {
+      return this.$store.getters.getQueueUsers(this.id);
+    }
   }
 };
 </script>

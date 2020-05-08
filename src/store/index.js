@@ -10,6 +10,7 @@ export default new Vuex.Store({
     queues: {},
     position: null,
     estimate: null,
+    queueUsers: {}
   },
   mutations: {
     joinQueue(state, queueId) {
@@ -41,7 +42,58 @@ export default new Vuex.Store({
           position
         }
       };
-    }
+    },
+    listQueue(state, queueId) {
+      state.queueUsers = {
+        ...state.queueUsers,
+        [queueId]: {
+          ...state.queueUsers[queueId],
+          error: null,
+        }
+      };
+    },
+    listQueueError(state, { queueId, message }) {
+      state.queueUsers = {
+        ...state.queueUsers,
+        [queueId]: {
+          ...state.queueUsers[queueId],
+          count: null,
+          error: message
+        }
+      };
+    },
+    listQueueSuccess(state, { queueId, count }) {
+      console.log(count);
+      state.queueUsers = {
+        ...state.queueUsers,
+        [queueId]: {
+          ...state.queueUsers[queueId],
+          error: null,
+          count,
+        }
+      };
+    },
+    shiftQueue(state, queueId) {
+      state.queueUsers = {
+        ...state.queueUsers,
+        [queueId]: {
+          ...state.queueUsers[queueId],
+          serving: null,
+          shifting: true,
+        }
+      };
+    },
+    shiftQueueSuccess(state, { queueId, userId }) {
+      state.queueUsers = {
+        ...state.queueUsers,
+        [queueId]: {
+          ...state.queueUsers[queueId],
+          count: state.queueUsers[queueId].count - 1,
+          serving: userId,
+          shifting: false,
+        }
+      };
+    },
   },
   actions: {
     async pollQueue({ commit, getters }, queueId) {
@@ -75,10 +127,43 @@ export default new Vuex.Store({
           message: "Cannot connect to queue service"
         });
       }
+    },
+    async listQueueUsers({ commit }, queueId) {
+      commit("listQueue", queueId);
+      try {
+        const response = await fetch(`${host}/queue/${queueId}`);
+        if (response.status === 404) {
+          commit("listQueueError", { queueId, message: "Queue not found" });
+          return;
+        }
+
+        const data = await response.json();
+        commit("listQueueSuccess", { ...data, queueId });
+      } catch (_) {
+        commit("listQueueError", {
+          queueId,
+          message: "Cannot connect to queue service"
+        });
+      }
+    },
+    async shiftQueue({ commit }, queueId) {
+      commit("shiftQueue", queueId);
+      try {
+        const response = await fetch(`${host}/queue/${queueId}/members`, { method: 'DELETE' });
+        if (response.status == 200) {
+          const data = await response.json();
+          commit("shiftQueueSuccess", { ...data, queueId });
+        } else {
+          console.error(response);
+        }
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
   getters: {
-    getQueue: state => queueId => state.queues[queueId] || { loading: true }
+    getQueue: state => queueId => state.queues[queueId] || { loading: true },
+    getQueueUsers: state => queueId => state.queueUsers[queueId] || { count: null },
   },
   modules: {}
 });
