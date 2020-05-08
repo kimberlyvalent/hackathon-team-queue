@@ -8,7 +8,7 @@
       <div>
         <input inputmode="numeric" type="text" v-model="code" />
       </div>
-      <button type="submit">Join</button>
+      <button type="submit" :disabled="code.length === 0">Join</button>
     </form>
   </div>
 </template>
