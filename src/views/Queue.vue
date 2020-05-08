@@ -9,9 +9,10 @@
       {{ queue.error }}
     </div>
     <div v-else>
-      <h1>You are now in the queue</h1>
-      {{ queue.position }}
-      {{ queue.estimate }}
+      <h1>{{ id }}</h1>
+      <h2>You are now in the queue</h2>
+      <p>Position: {{ queue.position +1 }}</p>
+      <p>Time estimate: {{ `${queue.estimate/1000} minutes` || 'You are at the front of the queue' }}</p>
     </div>
   </div>
 </template>
