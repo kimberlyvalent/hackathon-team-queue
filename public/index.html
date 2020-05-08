@@ -6,6 +6,42 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+        html {
+            font-size: 18px;
+        }
+        body {
+            font-size: 1.1rem;
+        }
+        button {
+            background: #000;
+            padding: 12px 16px;
+            font-size: 1.2rem;
+            color: #fff;
+            border: none;
+            margin: 16px;
+            box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+            transition: 500ms all;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button:disabled {
+            background: #666;
+        }
+        button:active {
+            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.0);
+        }
+
+        input {
+            border: 1px solid black;
+            margin: 16px;
+            padding: 12px;
+            font-size: 1.1rem;
+        }
+    </style>
   </head>
   <body>
     <noscript>
