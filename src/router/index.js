@@ -19,6 +19,13 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "queue" */ "../views/Queue.vue")
+  },
+  {
+    path: "/teller/queue/:id",
+    name: "QueueTeller",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "queue-teller" */ "../views/QueueTeller.vue")
   }
 ];
 
