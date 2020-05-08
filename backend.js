@@ -28,7 +28,7 @@ function makeId(length = 6) {
     return result;
 }
 
-function getQueueOrThrowError(id) {
+function getQueueOrThrowError(res, id) {
     var q = QUEUES[id];
     if (typeof q === 'undefined') {
         res.status(404).send({ message: `Queue does not exist - ${id}` });
@@ -76,7 +76,7 @@ app.get('/queue/', function(_req, res) {
 app.get('/queue/:queueId', function(req, res) {
     var queueId = req.params.queueId;
 
-    var q = getQueueOrThrowError(queueId);
+    var q = getQueueOrThrowError(res, queueId);
     console.log(q);
     if (q) {
         res.send({ count: q.queue.length });
@@ -87,7 +87,7 @@ app.get('/queue/:queueId', function(req, res) {
 app.get('/queue/:queueId/members', function(req, res) {
     var queueId = req.params.queueId;
 
-    var q = getQueueOrThrowError(queueId);
+    var q = getQueueOrThrowError(res, queueId);
     if (q) {
         res.send(q);
     }
@@ -98,7 +98,7 @@ app.get('/queue/:queueId/members/:userId', function(req, res) {
     var queueId = req.params.queueId;
     var userId = req.params.userId;
 
-    var q = getQueueOrThrowError(queueId);
+    var q = getQueueOrThrowError(res, queueId);
     if (q) {
         res.send(getUserData(q, userId));
     }
@@ -109,7 +109,7 @@ app.post('/queue/:queueId/members/', function(req, res) {
     var queueId = req.params.queueId;
     var userId = req.params.userId;
 
-    var q = getQueueOrThrowError(queueId);
+    var q = getQueueOrThrowError(res, queueId);
     if (q) {
         userId = makeId();
         q.addToEnd(userId);
@@ -121,7 +121,7 @@ app.post('/queue/:queueId/members/', function(req, res) {
 app.delete('/queue/:queueId/members', function(req, res) {
     var queueId = req.params.queueId;
 
-    var q = getQueueOrThrowError(queueId);
+    var q = getQueueOrThrowError(res, queueId);
     if (q) {
         userId = q.removeFromFront();
         res.send(getUserData(q, userId));
