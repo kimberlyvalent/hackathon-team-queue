@@ -9,10 +9,11 @@
       {{ queue.error }}
     </div>
     <div v-else>
-      <h1>{{ id }}</h1>
-      <h2>You are now in the queue</h2>
-      <p>Position: {{ queue.position +1 }}</p>
-      <p>Time estimate: {{ `${queue.estimate/1000} minutes` || 'You are at the front of the queue' }}</p>
+      <h1>Queue: {{ id }}</h1>
+      <h2>{{ typeof queue.position !== 'undefined' || 'You are now in the queue' }} </h2>
+      <p>Position: {{ typeof queue.position === 'undefined' ? 'Not in queue' : queue.position +1 }}</p>
+
+      <p>Time estimate: {{ queue.estimate ? `${queue.estimate/1000} minutes` : 'N/A' }}</p>
     </div>
   </div>
 </template>
