@@ -1,24 +1,72 @@
+/*
+ * REST API for managing queues.
+ */
 const express = require('express');
 const app = express();
 
+const Queue = require('./queue');
+
 const port = process.env.PORT || 3000;
 
-app.get('/', function(req, res) {
+// Global variable for testing.
+var QUEUES = {
+    1: new Queue()
+};
+
+app.get('/', function(_req, res) {
     res.send('Backend is up!');
 });
 
-app.get('/queue/', function(req, res) {
-    res.send('All queues');
+// Get all queues.
+app.get('/queue/', function(_req, res) {
+    queueNames = Object.keys(QUEUES);
+    res.send(queueNames);
 });
 
-app.get('/queue/:queueId', function(req, res) {
-    var id = req.params.queueId;
-    res.send(`Data for ${id}`);
-});
-
+// Create queue. For admin only.
 app.post('/queue/:queueId', function(req, res) {
     var id = req.params.queueId;
-    res.send(`Joined ${id}`);
+
+    if (typeof QUEUES[id] === 'undefined') {
+        QUEUES[id] = new Queue();
+        res.send(`Created queue ${id}!`);
+    }
+    else {
+        res.status(400).send(`Queue ${id} already exists!`);
+    }
 });
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+// Get items in queue.
+app.get('/queue/:queueId/members', function(req, res) {
+    var id = req.params.queueId;
+    var q = QUEUES[id];
+    if (q) {
+        res.send(q);
+    }
+});
+
+app.get('/queue/:queueId/members/length', function(req, res) {
+    var id = req.params.queueId;
+    var q = QUEUES[id];
+    res.send(q.length);
+});
+
+// Add user to queue.
+app.post('/queue/:queueId/members/:userId', function(req, res) {
+    var id = req.params.queueId;
+    var userId = req.params.userId;
+
+    var q = QUEUES[id];
+    q.push(userId);
+    res.send(`Joined ${id}!`);
+});
+
+// Remove user from queue.
+app.delete('/queue/:queueId/members', function(req, res) {
+    var id = req.params.queueId;
+    var q = QUEUES[id];
+    userId = q.pop();
+    res.send(userId);
+});
+
+app.listen(port, () => console.log(`Listening at ${port}`));
