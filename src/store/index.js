@@ -14,7 +14,8 @@ export default new Vuex.Store({
       state.queues = {
         ...state.queues,
         [queueId]: {
-          loading: true
+          loading: true,
+          error: null
         }
       };
     },
@@ -31,16 +32,32 @@ export default new Vuex.Store({
       state.queues = {
         ...state.queues,
         [queueId]: {
-          loading: false
+          loading: false,
+          error: null
         }
       };
     }
   },
   actions: {
+    async pollQueue({ commit, getters }, queueId) {
+      const queue = getters.getQueue(queueId);
+      if (queue.loading || queue.error) {
+        return;
+      }
+
+      const response = await fetch(
+        `${host}/queue/${queueId}/members/${queue.userId}`,
+        { method: "POST" }
+      );
+      const { id, estimate, position } = await response.json();
+      commit("joinQueueSuccess", { queueId, userId: id, estimate, position });
+    },
     async joinQueue({ commit }, queueId) {
       commit("joinQueue", queueId);
       try {
-        const response = await fetch(`${host}/queue/${queueId}/members`, { method: 'POST' });
+        const response = await fetch(`${host}/queue/${queueId}/members`, {
+          method: "POST"
+        });
         if (response.status === 404) {
           commit("joinQueueError", { queueId, message: "Queue not found" });
           return;

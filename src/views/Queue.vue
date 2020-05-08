@@ -14,8 +14,19 @@
 export default {
   name: "Queue",
   props: ["id"],
+  data() {
+    return {
+      polling: null
+    };
+  },
   mounted() {
     this.$store.dispatch("joinQueue", this.id);
+    this.polling = setInterval(() => {
+      this.$store.dispatch("pollQueue", this.id);
+    }, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   computed: {
     queue() {
