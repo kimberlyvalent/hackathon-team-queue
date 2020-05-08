@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+const program = require('commander');
+
+const queueSubcommand = program.command('queue')
+    .description('Manage queues')
+
+queueSubcommand.command('create')
+    .arguments('<name>')
+    .action((name) => {
+        console.log('create queue', name);
+    });
+
+queueSubcommand.command('list')
+    .action(() => {
+        console.log('list queues');
+    });
+
+queueSubcommand.command('delete')
+    .arguments('<queue-id>')
+    .action((id) => {
+        console.log('delete queues', id);
+    });
+
+program.parse(process.argv);

@@ -1,3 +1,4 @@
+// TODO: This should become a QueueClient
 class Queue {
     constructor() {
         this.queue = [];
