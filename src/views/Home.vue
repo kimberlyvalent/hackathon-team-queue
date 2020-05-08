@@ -6,7 +6,7 @@
     </div>
     <form @submit.prevent="joinQueue">
       <div>
-        <input inputmode="numeric" type="text" v-model="code">
+        <input inputmode="numeric" type="text" v-model="code" />
       </div>
       <button type="submit">Join</button>
     </form>
@@ -21,13 +21,13 @@ export default {
   name: "Home",
   data() {
     return {
-      code: '',
+      code: ""
     };
   },
   methods: {
     joinQueue() {
       this.$router.push(`/queue/${this.code}`);
-    },
+    }
   },
   components: {
     // HelloWorld

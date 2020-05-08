@@ -3,28 +3,61 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-const socket = new WebSocket(process.env.VUE_APP_BACKEND_URL);
-
-function createWebSocketPlugin(socket) {
-  return store => {
-    socket.onmessage = function(event) {
-      console.log(event);
-      store.commit("receiveData", event);
-    };
-    store.subscribe(mutation => {
-      if (mutation.type === "UPDATE_DATA") {
-        socket.emit("update", mutation.payload);
-      }
-    });
-  };
-}
-
-const plugin = createWebSocketPlugin(socket);
+const host = process.env.VUE_APP_BACKEND_URL;
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
-  plugins: [plugin]
+  state: {
+    queues: {}
+  },
+  mutations: {
+    joinQueue(state, queueId) {
+      state.queues = {
+        ...state.queues,
+        [queueId]: {
+          loading: true
+        }
+      };
+    },
+    joinQueueError(state, { queueId, message }) {
+      state.queues = {
+        ...state.queues,
+        [queueId]: {
+          loading: false,
+          error: message
+        }
+      };
+    },
+    joinQueueSuccess(state, { queueId }) {
+      state.queues = {
+        ...state.queues,
+        [queueId]: {
+          loading: false
+        }
+      };
+    }
+  },
+  actions: {
+    async joinQueue({ commit }, queueId) {
+      commit("joinQueue", queueId);
+      try {
+        const response = await fetch(`${host}/queue/${queueId}/members`, { method: 'POST' });
+        if (response.status === 404) {
+          commit("joinQueueError", { queueId, message: "Queue not found" });
+          return;
+        }
+
+        const { id, estimate, position } = await response.json();
+        commit("joinQueueSuccess", { queueId, userId: id, estimate, position });
+      } catch (_) {
+        commit("joinQueueError", {
+          queueId,
+          message: "Cannot connect to queue service"
+        });
+      }
+    }
+  },
+  getters: {
+    getQueue: state => queueId => state.queues[queueId] || { loading: true }
+  },
+  modules: {}
 });
