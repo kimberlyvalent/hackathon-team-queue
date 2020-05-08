@@ -106,10 +106,10 @@ app.get('/queue/:queueId/members/:userId', function(req, res) {
 
 // Add user to queue and give them a random ID.
 app.post('/queue/:queueId/members/', function(req, res) {
-    var id = req.params.queueId;
+    var queueId = req.params.queueId;
     var userId = req.params.userId;
 
-    var q = getQueueOrThrowError(id);
+    var q = getQueueOrThrowError(queueId);
     if (q) {
         userId = makeId();
         q.addToEnd(userId);
