@@ -1,4 +1,14 @@
-# Queue
+# Queue Smarter
+> Queue virtually, avoid standing in line and practice social distancing when queing_
+
+
+_GetSmarter Hackathon project for May 2020 - "In case of emergency"_
+
+
+## Live site
+
+[queue-smarter.netlify.app](https://queue-smarter.netlify.app/)
+
 
 ## Mission
 
@@ -28,3 +38,20 @@ A staff member at the store will administer the queue to keep track of who can e
 - [Installation](docs/installation.md)
 - [Usage](docs/usage.md)
 - [Resources](docs/resources.md)
+
+
+## Limitations and future development
+
+- Authentication and registrations of users could be done.
+- Use QR code or physical ID or similar technology to help with verifying who someone and that they are in the store.
+- Implement policy and logic for misbehaving customers or customers who need to get bumped off the queue.
+- Add scheduling so people can be in request to be in a queue later in the day and get notified they are in.
+- Separate control for the admin view can be enforced.
+- Use Redis on Heroku for a persistent distributed queueing system and hook the backend server into that, instead of using the in-memory NodeJS queues.
+- Use WebSockets for continuous streams, to avoid using REST API and polling.
+- Add geo-location to recommend people to queues based on their proximity. And to tell people when to leave for the store, based on their distance away and how many people in the queue.
+
+
+## License
+
+Released under [MIT](/LICENSE).
