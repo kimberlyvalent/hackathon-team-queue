@@ -1,6 +1,7 @@
 /*
  * REST API for managing queues.
  */
+const cors = require('cors');
 const express = require("express");
 
 const Queue = require("./queue");
@@ -60,6 +61,7 @@ function getUserData(q, userId) {
 }
 
 const app = express();
+app.use(cors());
 
 app.get("/", function(_req, res) {
   res.send("Backend is up!");
