@@ -1,12 +1,24 @@
-const WebSocket = require("ws");
+const express = require('express');
+const app = express();
 
 const port = process.env.PORT || 3000;
-const wss = new WebSocket.Server({ port });
 
-wss.on("connection", function connection(ws) {
-  ws.on("message", function incoming(message) {
-    console.log("received: %s", message);
-  });
-
-  ws.send("something");
+app.get('/', function(req, res) {
+    res.send('Backend is up!');
 });
+
+app.get('/queue/', function(req, res) {
+    res.send('All queues');
+});
+
+app.get('/queue/:queueId', function(req, res) {
+    var id = req.params.queueId;
+    res.send(`Data for ${id}`);
+});
+
+app.post('/queue/:queueId', function(req, res) {
+    var id = req.params.queueId;
+    res.send(`Joined ${id}`);
+});
+
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
