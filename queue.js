@@ -1,15 +1,18 @@
-// TODO: This should become a QueueClient
 class Queue {
     constructor() {
         this.queue = [];
     }
 
-    push(user) {
-        this.queue.unshift(user);
+    addToEnd(user) {
+        this.queue.push(user);
     }
 
-    pop() {
-        return this.queue.pop();
+    removeFromFront() {
+        return this.queue.shift();
+    }
+
+    position(user) {
+        return this.queue.indexOf(user);
     }
 }
 
