@@ -28,12 +28,15 @@ export default new Vuex.Store({
         }
       };
     },
-    joinQueueSuccess(state, { queueId }) {
+    joinQueueSuccess(state, { queueId, estimate, position, userId }) {
       state.queues = {
         ...state.queues,
         [queueId]: {
           loading: false,
-          error: null
+          error: null,
+          userId,
+          estimate,
+          position
         }
       };
     }
@@ -46,11 +49,10 @@ export default new Vuex.Store({
       }
 
       const response = await fetch(
-        `${host}/queue/${queueId}/members/${queue.userId}`,
-        { method: "POST" }
+        `${host}/queue/${queueId}/members/${queue.userId}`
       );
-      const { id, estimate, position } = await response.json();
-      commit("joinQueueSuccess", { queueId, userId: id, estimate, position });
+      const { userId, estimate, position } = await response.json();
+      commit("joinQueueSuccess", { queueId, userId, estimate, position });
     },
     async joinQueue({ commit }, queueId) {
       commit("joinQueue", queueId);
@@ -63,8 +65,8 @@ export default new Vuex.Store({
           return;
         }
 
-        const { id, estimate, position } = await response.json();
-        commit("joinQueueSuccess", { queueId, userId: id, estimate, position });
+        const data = await response.json();
+        commit("joinQueueSuccess", { ...data, queueId });
       } catch (_) {
         commit("joinQueueError", {
           queueId,

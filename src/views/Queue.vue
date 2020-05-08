@@ -1,12 +1,18 @@
 <template>
   <div class="queue">
     <router-link to="/">Back</router-link>
-    <h1>Joining queue #{{ id }}</h1>
-    <div v-if="queue.loading">Loading&hellip;</div>
+    <div v-if="queue.loading">
+      <h1>Joining queue #{{ id }}</h1>
+      <div>Loading&hellip;</div>
+    </div>
     <div v-else-if="queue.error">
       {{ queue.error }}
     </div>
-    <div v-else>Hello!</div>
+    <div v-else>
+      <h1>You are now in the queue</h1>
+      {{ queue.position }}
+      {{ queue.estimate }}
+    </div>
   </div>
 </template>
 

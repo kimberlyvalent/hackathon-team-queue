@@ -1,19 +1,19 @@
 class Queue {
-    constructor() {
-        this.queue = [];
-    }
+  constructor() {
+    this.queue = [];
+  }
 
-    addToEnd(user) {
-        this.queue.push(user);
-    }
+  addToEnd(user) {
+    this.queue.push(user);
+  }
 
-    removeFromFront() {
-        return this.queue.shift();
-    }
+  removeFromFront() {
+    return this.queue.shift();
+  }
 
-    position(user) {
-        return this.queue.indexOf(user);
-    }
+  position(user) {
+    return this.queue.indexOf(user);
+  }
 }
 
 module.exports = Queue;
