@@ -7,7 +7,9 @@ const host = process.env.VUE_APP_BACKEND_URL;
 
 export default new Vuex.Store({
   state: {
-    queues: {}
+    queues: {},
+    position: null,
+    estimate: null,
   },
   mutations: {
     joinQueue(state, queueId) {
