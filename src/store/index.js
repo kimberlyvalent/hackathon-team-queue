@@ -10,9 +10,19 @@ export default new Vuex.Store({
     queues: {},
     position: null,
     estimate: null,
-    queueUsers: {}
+    queueUsers: {},
+    userId: null,
   },
   mutations: {
+    waitingInQueue(state, queueId) {
+      state.queues = {
+        ...state.queues,
+        [queueId]: {
+          loading: false,
+          error: null
+        }
+      };
+    },
     joinQueue(state, queueId) {
       state.queues = {
         ...state.queues,
@@ -109,7 +119,18 @@ export default new Vuex.Store({
       commit("joinQueueSuccess", { queueId, userId, estimate, position });
     },
     async joinQueue({ commit }, queueId) {
+      // Check if already in this queue.
+      const userId = localStorage.getItem(`queue-${queueId}`);
+
+      if (userId) {
+        console.log(userId)
+        commit("waitingInQueue", { queueId });
+        commit("joinQueueSuccess", { queueId });
+        return;
+      }
+
       commit("joinQueue", queueId);
+
       try {
         const response = await fetch(`${host}/queue/${queueId}/members`, {
           method: "POST"
@@ -120,6 +141,7 @@ export default new Vuex.Store({
         }
 
         const data = await response.json();
+        localStorage.setItem(`queue-${queueId}`, data.userId)
         commit("joinQueueSuccess", { ...data, queueId });
       } catch (_) {
         commit("joinQueueError", {
