@@ -3,14 +3,14 @@
 
 
 ## Development
-To serve the front-end
+To serve the front-end app.
 ```
 npm run serve
 ```
 
-To start the WebSocket server, run
+To start the backend app.
 ```
-npm run dev
+npm run backend
 ```
 
 ## Compiles and minifies for production
