@@ -1,5 +1,5 @@
 # Queue Smarter
-> Queue virtually, avoid standing in line and practice social distancing when queing_
+> Queue virtually, avoid standing in line and practice social distancing when queuing
 
 
 _GetSmarter Hackathon project for May 2020 - "In case of emergency"_
