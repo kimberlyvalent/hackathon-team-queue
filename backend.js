@@ -10,7 +10,9 @@ const port = process.env.PORT || 3000;
 
 // Global variable for testing.
 var QUEUES = {
-    1: new Queue()
+    foo: new Queue(),
+    bar: new Queue(),
+    baz: new Queue()
 };
 
 app.get('/', function(_req, res) {
@@ -21,19 +23,6 @@ app.get('/', function(_req, res) {
 app.get('/queue/', function(_req, res) {
     queueNames = Object.keys(QUEUES);
     res.send(queueNames);
-});
-
-// Create queue. For admin only.
-app.post('/queue/:queueId', function(req, res) {
-    var id = req.params.queueId;
-
-    if (typeof QUEUES[id] === 'undefined') {
-        QUEUES[id] = new Queue();
-        res.send(`Created queue ${id}!`);
-    }
-    else {
-        res.status(400).send(`Queue ${id} already exists!`);
-    }
 });
 
 // Get items in queue.
