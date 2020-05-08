@@ -1,7 +1,8 @@
 <template>
   <div class="queue-teller">
     <router-link to="/">Back</router-link>
-    <div v-if="users.serving">Now serving {{ users.serving }}</div>
+    <h1>{{ id }}</h1>
+    <div v-if="users.serving">Now serving <strong>{{ users.serving }}</strong></div>
     <div v-if="users.count === null">
       Loading&hellip;
     </div>

@@ -14,15 +14,6 @@ export default new Vuex.Store({
     userId: null,
   },
   mutations: {
-    waitingInQueue(state, queueId) {
-      state.queues = {
-        ...state.queues,
-        [queueId]: {
-          loading: false,
-          error: null
-        }
-      };
-    },
     joinQueue(state, queueId) {
       state.queues = {
         ...state.queues,
@@ -116,20 +107,25 @@ export default new Vuex.Store({
         `${host}/queue/${queueId}/members/${queue.userId}`
       );
       const { userId, estimate, position } = await response.json();
+
+      // User has left the queue
+      if (userId && !position) {
+        localStorage.removeItem(`queue-${queueId}`);
+      }
+
       commit("joinQueueSuccess", { queueId, userId, estimate, position });
     },
     async joinQueue({ commit }, queueId) {
       // Check if already in this queue.
+      commit("joinQueue", queueId);
       const userId = localStorage.getItem(`queue-${queueId}`);
 
-      if (userId) {
-        console.log(userId)
-        commit("waitingInQueue", { queueId });
-        commit("joinQueueSuccess", { queueId });
+      if (userId !== null) {
+        // We don't know the user's position until the next poll happens, so
+        // indicate this to the front-end
+        commit("joinQueueSuccess", { queueId, userId, position: -1 });
         return;
       }
-
-      commit("joinQueue", queueId);
 
       try {
         const response = await fetch(`${host}/queue/${queueId}/members`, {

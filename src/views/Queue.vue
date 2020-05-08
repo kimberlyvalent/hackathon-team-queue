@@ -1,6 +1,7 @@
 <template>
   <div class="queue">
     <router-link to="/">Back</router-link>
+    <h1>{{ id }}</h1>
     <div v-if="queue.loading">
       <h1>Joining queue #{{ id }}</h1>
       <div>Loading&hellip;</div>
@@ -8,12 +9,20 @@
     <div v-else-if="queue.error">
       {{ queue.error }}
     </div>
-    <div v-else>
-      <h1>Queue: {{ id }}</h1>
-      <h2>{{ typeof queue.position !== 'undefined' || 'You are now in the queue' }} </h2>
-      <p>Position: {{ typeof queue.position === 'undefined' ? 'Not in queue' : queue.position +1 }}</p>
+    <div v-else-if="typeof queue.position === 'undefined'">
+        <h1>Thanks for waiting</h1>
+        <div><strong>{{ queue.userId }}</strong> you're up!</div>
+    </div>
+    <div v-else-if="queue.position >= 0">
+      <h2>You are now in the queue</h2>
+      <div v-if="queue.positiion !== 1">There are <strong>{{ queue.position }}</strong> people ahead of you</div>
+      <div v-else>There is <strong>{{ queue.position }}</strong> person ahead of you</div>
 
-      <p>Time estimate: {{ queue.estimate ? `${queue.estimate/1000} minutes` : 'N/A' }}</p>
+      Your number is <strong>{{ queue.userId }}</strong>
+
+      <div v-if="typeof queue.estimate === 'number'">
+        Estimated wait is <em>{{ `${queue.estimate/1000} minutes` }}</em>
+      </div>
     </div>
   </div>
 </template>
