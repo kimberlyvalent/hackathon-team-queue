@@ -13,7 +13,7 @@ _GetSmarter Hackathon project for May 2020 - "In case of emergency"_
 ### Views
 
 - Join a queue
-    - [Homepage](https://queue-smarter.netlify.app/) - enter `clicks` for example.
+    - [homepage](https://queue-smarter.netlify.app/) - enter `clicks` for example.
 - Public queues: 
     - [clicks](https://queue-smarter.netlify.app/queue/clicks)
     - [woolworths](https://queue-smarter.netlify.app/queue/woolworths)
