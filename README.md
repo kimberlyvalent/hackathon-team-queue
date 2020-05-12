@@ -8,11 +8,20 @@ _GetSmarter Hackathon project for May 2020 - "In case of emergency"_
 ## Live site
 
 - Frontend: [queue-smarter.netlify.app](https://queue-smarter.netlify.app/)
-    - Sample shop queues allowed:
-        - `clicks`
-        - `woolworths`
-        - `picknpay`
 - REST API backend: [hackathon2u-queue.herokuapp.com](https://hackathon2u-queue.herokuapp.com/)
+
+### Views
+
+- Join a queue
+    - [Homepage](https://queue-smarter.netlify.app/) - enter `clicks` for example.
+- Public queues: 
+    - [clicks](https://queue-smarter.netlify.app/queue/clicks)
+    - [woolworths](https://queue-smarter.netlify.app/queue/woolworths)
+    - [picknpay](https://queue-smarter.netlify.app/queue/picknpay)
+- Teller/admin views:
+    - [clicks](https://queue-smarter.netlify.app/teller/queue/clicks)
+    - [woolworths](https://queue-smarter.netlify.app/teller/queue/woolworths)
+    - [picknpay](https://queue-smarter.netlify.app/teller/queue/picknpay)
 
 
 ## Mission
