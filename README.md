@@ -13,12 +13,12 @@ _GetSmarter Hackathon project for May 2020 - "In case of emergency"_
 ### Views
 
 - Join a queue
-    - [homepage](https://queue-smarter.netlify.app/) - enter `clicks` for example.
-- Public queues: 
+    - [homepage](https://queue-smarter.netlify.app/) - enter one of the valid queue names listed below. e.g. `clicks`.
+- Public queues: (following the URL you will view the queue and automatically join)
     - [clicks](https://queue-smarter.netlify.app/queue/clicks)
     - [woolworths](https://queue-smarter.netlify.app/queue/woolworths)
     - [picknpay](https://queue-smarter.netlify.app/queue/picknpay)
-- Teller/admin views:
+- Teller views: (these should be restricted to admin users only)
     - [clicks](https://queue-smarter.netlify.app/teller/queue/clicks)
     - [woolworths](https://queue-smarter.netlify.app/teller/queue/woolworths)
     - [picknpay](https://queue-smarter.netlify.app/teller/queue/picknpay)
