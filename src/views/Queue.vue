@@ -21,7 +21,7 @@
       Your number is <strong>{{ queue.userId }}</strong>
 
       <div v-if="typeof queue.estimate === 'number'">
-        Estimated wait is <em>{{ `${queue.estimate/1000} minutes` }}</em>
+        Estimated wait is <em>{{ `${queue.estimate/60/60} minutes` }}</em>
       </div>
     </div>
   </div>
