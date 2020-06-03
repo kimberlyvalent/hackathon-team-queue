@@ -13,6 +13,8 @@
 
 In keeping with the theme and the need for physical distancing during Covid-19 and lockdown, we decided on a virtual queueing system. This lets people join an online queue for a real shop, such as Clicks pharmacy, without having to actually stand in a physical line. We added a "teller" admin view for a staff member to manage people entering the store if they are at the start of the queue.
 
+Our application made a prototype with limited functionality, based on the time available. But we hope that other organizations can take our idea further and partner with retailers, malls and pharmacies to help people queue while avoiding congestion.
+
 The application makes use of Node.js - as required by the hackathon rules. We made the frontend an Vue.js app served on Netlify and the backend is an Express API running on Heroku.
 
 
