@@ -9,7 +9,7 @@
 
 ## About
 
-"Queue Smarter" is a project by Team Queue - this project was created as an effort in the _GetSmarter_ Systems and Technology department's hackathon event in May 2020. The theme was theme "In case of emergency".
+"Queue Smarter" is a project by "Team Queue". The project was created during a 2-day hackathon event at _GetSmarter_, where members of the Systems and Technology dept were split into teams. The event was in May 2020 and was done remotely. The theme was "In case of emergency".
 
 In keeping with the theme and the need for physical distancing during Covid-19 and lockdown, we decided on a virtual queueing system. This lets people join an online queue for a real shop, such as Clicks pharmacy, without having to actually stand in a physical line. We added a "teller" admin view for a staff member to manage people entering the store if they are at the start of the queue.
 
