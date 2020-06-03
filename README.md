@@ -2,7 +2,18 @@
 > Queue virtually, avoid standing in line and practice social distancing when queuing
 
 
-_GetSmarter Hackathon project for May 2020 - "In case of emergency"_
+## Sample
+
+![all views](all-views.png)
+
+
+## About
+
+This project was created as a team effort in the _GetSmarter_ hackathon project in May 2020, with theme "In case of emergency".
+
+In keeping with the theme and the need for physical distancing during Covid-19 and lockdown, we decided on a virtual queueing system. This lets people join an online queue for a real shop, such as Clicks pharamcy, without having to actually stand in a physical line. We added a "teller" admin view for a staff member to manage people entering the store if they are at the start of the queue.
+
+The application makes use of Node.js - as required by the hackathon rules. We made the frontend using a Vue.js app serving on Netlify and the backend as an Express API running on Heroku.
 
 
 ## Live site
@@ -10,27 +21,60 @@ _GetSmarter Hackathon project for May 2020 - "In case of emergency"_
 - Frontend: [queue-smarter.netlify.app](https://queue-smarter.netlify.app/)
 - REST API backend: [hackathon2u-queue.herokuapp.com](https://hackathon2u-queue.herokuapp.com/)
 
-### Views
+These can also be access on a local dev server.
 
-- Join a queue
-    - [homepage](https://queue-smarter.netlify.app/) - enter one of the valid queue names listed below. e.g. `clicks`.
-- Public queues: (following the URL you will view the queue and automatically join)
-    - [clicks](https://queue-smarter.netlify.app/queue/clicks)
-    - [woolworths](https://queue-smarter.netlify.app/queue/woolworths)
-    - [picknpay](https://queue-smarter.netlify.app/queue/picknpay)
-- Teller views: (these should be restricted to admin users only)
-    - [clicks](https://queue-smarter.netlify.app/teller/queue/clicks)
-    - [woolworths](https://queue-smarter.netlify.app/teller/queue/woolworths)
-    - [picknpay](https://queue-smarter.netlify.app/teller/queue/picknpay)
+
+## Application views
+
+### Join a queue
+
+- [homepage](https://queue-smarter.netlify.app/) 
+
+Enter one of the supported queue names - `clicks`, `woolworths` or `picknpay`.
+
+<p align="center">
+    <img src="join.png" width="300" alt="join">
+</p>
+
+
+### Wait in a queue
+
+You will be redirected to one of these queues.
+
+- [clicks](https://queue-smarter.netlify.app/queue/clicks)
+- [woolworths](https://queue-smarter.netlify.app/queue/woolworths)
+- [picknpay](https://queue-smarter.netlify.app/queue/picknpay)
+
+<p align="center">
+    <img src="joined.png" width="300" alt="joined">
+</p>
+
+
+### Admin view
+
+These are teller views for a shop staff member to let people into the store if they are at the front of the virtual queue - they will have to valid their identity such as using the random ID supplied to each user.
+
+
+- [clicks](https://queue-smarter.netlify.app/teller/queue/clicks)
+- [woolworths](https://queue-smarter.netlify.app/teller/queue/woolworths)
+- [picknpay](https://queue-smarter.netlify.app/teller/queue/picknpay)
+
+These are public - authorization would be enforced if this was a production app.
+
+<p align="center">
+    <img src="teller.png" width="300" alt="teller">
+</p>
 
 
 ## Mission
 
 In a world where social and physical distancing has become the new norm, QueueSmarter seeks to reduce the need to physically queue outside storefronts. By enabling users to queue virtually, we empower them to both take control of their time, as well as limit their risk of exposure.
 
+
 ## Target Audience
 
 The service should be open to all, with only barrier to entry being a smartphone. Whilst online deliveries are commonplace, many still chose to shop in-person. Retailers also benefit from the service, since it gives them an effective means to control crowds as well as avoid disgruntled patrons having to stand and queue for extended periods.
+
 
 ## Use-case
 
@@ -61,7 +105,7 @@ A staff member at the store will administer the queue to keep track of who can e
 - Implement policy and logic for misbehaving customers or customers who need to get bumped off the queue.
 - Add scheduling so people can be in request to be in a queue later in the day and get notified they are in.
 - Separate control for the admin view can be enforced.
-- Use Redis on Heroku for a persistent distributed queueing system and hook the backend server into that, instead of using the in-memory NodeJS queues.
+- Use Redis on Heroku for a persistent distributed queueing system and hook the backend server into that, instead of using the in-memory Node.js queues.
 - Use WebSockets for continuous streams, to avoid using REST API and polling.
 - Add geo-location to recommend people to queues based on their proximity. And to tell people when to leave for the store, based on their distance away and how many people in the queue.
 
