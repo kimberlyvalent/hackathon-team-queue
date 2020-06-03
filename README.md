@@ -4,14 +4,14 @@
 
 ## Sample
 
-![all views](all-views.png)
+![all views](/docs/_media/all-views.png)
 
 
 ## About
 
 This project was created as a team effort in the _GetSmarter_ hackathon project in May 2020, with theme "In case of emergency".
 
-In keeping with the theme and the need for physical distancing during Covid-19 and lockdown, we decided on a virtual queueing system. This lets people join an online queue for a real shop, such as Clicks pharamcy, without having to actually stand in a physical line. We added a "teller" admin view for a staff member to manage people entering the store if they are at the start of the queue.
+In keeping with the theme and the need for physical distancing during Covid-19 and lockdown, we decided on a virtual queueing system. This lets people join an online queue for a real shop, such as Clicks pharmacy, without having to actually stand in a physical line. We added a "teller" admin view for a staff member to manage people entering the store if they are at the start of the queue.
 
 The application makes use of Node.js - as required by the hackathon rules. We made the frontend using a Vue.js app serving on Netlify and the backend as an Express API running on Heroku.
 
@@ -28,12 +28,12 @@ These can also be access on a local dev server.
 
 ### Join a queue
 
-- [homepage](https://queue-smarter.netlify.app/) 
+- [homepage](https://queue-smarter.netlify.app/)
 
 Enter one of the supported queue names - `clicks`, `woolworths` or `picknpay`.
 
 <p align="center">
-    <img src="join.png" width="300" alt="join">
+    <img src="/docs/_media/join.png" width="300" alt="join">
 </p>
 
 
@@ -46,7 +46,7 @@ You will be redirected to one of these queues.
 - [picknpay](https://queue-smarter.netlify.app/queue/picknpay)
 
 <p align="center">
-    <img src="joined.png" width="300" alt="joined">
+    <img src="/docs/_media/joined.png" width="300" alt="joined">
 </p>
 
 
@@ -62,7 +62,7 @@ These are teller views for a shop staff member to let people into the store if t
 These are public - authorization would be enforced if this was a production app.
 
 <p align="center">
-    <img src="teller.png" width="300" alt="teller">
+    <img src="/docs/_media/teller.png" width="300" alt="teller">
 </p>
 
 
@@ -93,9 +93,9 @@ A staff member at the store will administer the queue to keep track of who can e
 
 ## Documentation
 
-- [Installation](docs/installation.md)
-- [Usage](docs/usage.md)
-- [Resources](docs/resources.md)
+- [Installation](/docs/installation.md)
+- [Usage](/docs/usage.md)
+- [Resources](/docs/resources.md)
 
 
 ## Limitations and future development
