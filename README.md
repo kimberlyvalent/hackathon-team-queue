@@ -4,8 +4,9 @@
 
 ## Sample
 
-![all views](/docs/_media/all-views.png "Sample app screenshots")
-
+<div align="center">
+    <img src="/docs/_media/all-views.png" height="250" alt="all views" title="Sample app screenshots">
+</div>
 
 ## About
 
