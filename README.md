@@ -4,7 +4,7 @@
 
 ## Sample
 
-![all views](/docs/_media/all-views.png "Sample app screenshots)
+![all views](/docs/_media/all-views.png "Sample app screenshots")
 
 
 ## About
