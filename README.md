@@ -4,7 +4,7 @@
 
 ## Sample
 
-![all views](/docs/_media/all-views.png)
+![all views](/docs/_media/all-views.png "Sample app screenshots)
 
 
 ## About
@@ -15,7 +15,7 @@ In keeping with the theme and the need for physical distancing during Covid-19 a
 
 Our application made a prototype with limited functionality, based on the time available. But we hope that other organizations can take our idea further and partner with retailers, malls and pharmacies to help people queue while avoiding congestion.
 
-The application makes use of Node.js - as required by the hackathon rules. We made the frontend an Vue.js app served on Netlify and the backend is an Express API running on Heroku.
+The application makes use of Node.js - as required by the hackathon rules. We made the frontend an Vue.js app served on Netlify and the backend is an Express API hosted on Heroku.
 
 
 ## Live site
@@ -23,14 +23,14 @@ The application makes use of Node.js - as required by the hackathon rules. We ma
 - Frontend: [queue-smarter.netlify.app](https://queue-smarter.netlify.app/)
 - REST API backend: [hackathon2u-queue.herokuapp.com](https://hackathon2u-queue.herokuapp.com/)
 
-These can also be access on a local dev server.
+These can both be accessed on a local dev server.
 
 
 ## Application views
 
 ### Join a queue
 
-- [homepage](https://queue-smarter.netlify.app/)
+- [queue-smarter.netlify.app/](https://queue-smarter.netlify.app/) homepage
 
 Enter one of the supported queue names - `clicks`, `woolworths` or `picknpay`.
 
